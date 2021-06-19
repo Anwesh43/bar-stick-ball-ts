@@ -206,3 +206,25 @@ class BarStickBall {
         this.curr.startUpdating(cb)
     }
 }
+
+class Renderer {
+
+    bsb : BarStickBall = new BarStickBall()
+    animator : Animator = new Animator()
+
+    render(context : CanvasRenderingContext2D) {
+        this.bsb.draw(context)
+    }
+
+    handleTap(cb : Function) {
+        this.bsb.startUpdating(() => {
+            this.animator.start(() => {
+                cb()
+                this.bsb.update(() => {
+                    this.animator.stop()
+                    cb()
+                })
+            })
+        })
+    }
+}
