@@ -1,8 +1,8 @@
 const w : number = window.innerWidth 
 const h : number = window.innerHeight 
-const parts : number = 4 
+const parts : number = 3
 const strokeFactor : number = 90 
-const scGap : number = 0.02 / parts 
+const scGap : number = 0.03 / parts 
 const rot : number = Math.PI / 2 
 const delay : number = 20 
 const backColor : string = "#BDBDBD"
@@ -43,8 +43,9 @@ class DrawingUtil {
         const r : number = Math.min(w, h) / rFactor  
         const barW : number = Math.min(w, h) / barWFactor 
         const barH : number = Math.min(w, h) / barHFactor 
+        console.log("SCALE", sc1, sc2, sc3)
         context.save()
-        context.translate(w / 2, h / 2 + (h / 2 + r) * sc3)
+        context.translate(w / 2, h / 2 + (h / 2 + r + barH) * sc3)
         context.rotate(2 * Math.PI * sc3)
         for (var j = 0; j < 2; j++) {
             context.save()
@@ -57,7 +58,7 @@ class DrawingUtil {
             )
             context.restore()
         }
-        context.fillRect(-(barW / 2) * sc1, -barH / 2, barW, barH)
+        context.fillRect(-(barW / 2) * sc1, -barH / 2, barW * sc1, barH)
         context.restore()
     }
 
